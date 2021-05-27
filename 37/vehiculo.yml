@@ -1,0 +1,137 @@
+openapi: 3.0.1
+info:
+  title: API vehiculos
+  description: Esto es un CRUD de vehiculos
+  contact:
+    email: andreybejarano@gmail.com
+  version: 1.0.0
+servers:
+- url: http:///localhost:3000
+tags:
+- name: Vehiculos
+  description: Modulo de vehiculos
+paths:
+  /vehiculo:
+    post:
+      tags:
+      - Vehiculos
+      summary: Agregar nuevo vehiculo
+      requestBody:
+        description: Aqui se deben enviar los datos en json para crear un nuevo vehiculo
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vehiculo'
+      responses:
+        201:
+          description: Vehiculo creado
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+                    example: vehiculo creado
+    get:
+      tags:
+      - Vehiculos
+      summary: Listar todos los vehiculos
+      responses:
+        200:
+          description: Todos los vehiculos
+          content: 
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/vehiculo'
+  /vehiculo/{vehiculoId}:
+    get:
+      tags:
+      - Vehiculos
+      summary: Listar vehiculo por id
+      parameters:
+      - name: vehiculoId
+        in: path
+        description: ID del vehiculo
+        required: true
+        schema: 
+          type: integer
+      responses:
+        200:
+          description: Vehiculo
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/vehiculo'
+    patch:
+      tags:
+      - Vehiculos
+      summary: editar un nuevo vehiculo
+      parameters:
+      - name: vehiculoId
+        in: path
+        description: ID del vehiculo a editar
+        required: true
+        schema: 
+          type: integer
+      requestBody:
+        description: Aqui se deben enviar los datos en json que quiero editar del vehiculo
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/vehiculo'
+      responses:
+        200:
+          description: Vehiculo editado
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+                    example: el vehiculo con el id {vehiculoId} editado
+    delete:
+      tags:
+      - Vehiculos
+      summary: Eliminar un nuevo vehiculo
+      parameters:
+      - name: vehiculoId
+        in: path
+        description: ID del vehiculo a eliminar
+        required: true
+        schema: 
+          type: integer
+      responses:
+        202:
+          description: Vehiculo eliminado
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+                    example: el vehiculo eliminado
+components:
+  schemas:
+    vehiculo:
+      type: object
+      properties:
+        marca:
+          type: string
+          example: Ford
+        modelo:
+          type: string
+          example: fiesta
+        fecha_fabricacion:
+          type: string
+          example: '2020/03/01'
+        puertas:
+          type: integer
+          example: 4
+        disponible:
+          type: boolean
+          example: true
