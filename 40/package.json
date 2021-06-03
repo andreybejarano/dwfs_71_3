@@ -1,0 +1,26 @@
+{
+  "name": "40",
+  "version": "1.0.0",
+  "description": "Clase 40 npm y variables de entorno",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "npm",
+    "node",
+    "clase",
+    "40"
+  ],
+  "author": "Erik Andrey Bejarano <andreybejarano@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "moment": "^2.29.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
