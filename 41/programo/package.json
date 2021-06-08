@@ -1,0 +1,25 @@
+{
+  "name": "41",
+  "version": "1.0.0",
+  "description": "Clase 41 express.js ",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Express",
+    "clase",
+    "41",
+    "http",
+    "server"
+  ],
+  "author": "Andrey Bejarano <andreybejarano@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
