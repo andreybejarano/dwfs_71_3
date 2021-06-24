@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const jwt= require('jsonwebtoken');
+const jwtMiddleware = require('./middlewares/jwt');
 
 const app = express();
 
@@ -41,7 +42,8 @@ app.post('/login', (req, res) => {
        }
    },process.env.JWT_SECRET);
     return res.json({
-        token 
+        token,
+        admin: user.admin 
     });
 })
 
@@ -54,7 +56,13 @@ app.post('/user', (req, res) => {
     })
 })
 
-app.get('/user', (req, res) => {
+app.get('/user', jwtMiddleware, (req, res) => {
+    if(!req.user.admin) {
+        return res.status(401).json({
+            status: 401,
+            error: 'user unathourized'
+        });
+    }
     return res.json(users);
 })
 

@@ -1,6 +1,13 @@
-const txtUser = document.getElementById("username");
-const txtPassword = document.getElementById("password");
-const btnSubmit = document.getElementById("submit");
+const token = localStorage.getItem('ejercicio_token');
+const admin = localStorage.getItem('ejercicio_admin');
+
+if(!token) {
+    window.location.replace('/public');
+}
+
+if(admin !== 'true') {
+    window.location.replace('/public/welcome.html');
+}
 
 async function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
@@ -34,16 +41,11 @@ const request = (url, options = {}) => {
     });
 };
 
-btnSubmit.addEventListener("click", (e) => {
-    e.preventDefault();
-    request("/login", {
-        method: "POST",
-        body: { user: txtUser.value, password: txtPassword.value },
-    }).then((res) => {
-        localStorage.setItem("ejercicio_token", res.token);
-        localStorage.setItem('ejercicio_admin', res.admin);
-        window.location.replace('/public/welcome.html');
-    }).catch(err => {
-      console.log(err);
-    });
-});
+request('/user', {
+    method: 'GET',
+    headers: {
+        Authorization: `Bearer ${token}`
+    }
+}).then(res => {
+    console.log(res);
+})
