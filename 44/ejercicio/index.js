@@ -1,11 +1,23 @@
 require('dotenv').config();
 const express = require('express');
+const jwt= require('jsonwebtoken');
+
 const app = express();
 
 const users = [{
+    id:1,
     user: 'juan',
     password: '123456',
-    country: 'AR'
+    country: 'AR',
+    admin:true
+
+},{
+    id:2,
+    user: 'lautaro',
+    password: '123456',
+    country: 'BR',
+    admin:false
+
 }];
 
 app.use(express.json());
@@ -21,8 +33,16 @@ app.post('/login', (req, res) => {
             error: 'user/password invalid'
         })
     }
-    delete user.password;
-    return res.json(user);
+   const token= jwt.sign({
+       user:{
+           id:user.id,
+           admin:user.admin,
+           country: user.country
+       }
+   },process.env.JWT_SECRET);
+    return res.json({
+        token 
+    });
 })
 
 app.post('/user', (req, res) => {
