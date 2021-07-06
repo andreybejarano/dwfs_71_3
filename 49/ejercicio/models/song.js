@@ -1,5 +1,7 @@
 const {DataTypes} = require('sequelize');
 const connection = require('../connection');
+const bandModel = require('./band');
+const albumModel = require('./album');
 const model = connection.define(
     'songs',
     {
@@ -21,5 +23,6 @@ const model = connection.define(
     },
     {timestamps: false}
 );
-
+model.belongsTo(bandModel, {as: 'bands', foreignKey: 'band'});
+model.belongsTo(albumModel, {as: 'albums', foreignKey: 'album'});
 module.exports = model
