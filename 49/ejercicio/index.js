@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/song', SongController.getAll);
 app.get('/band', BandController.getAll);
 app.get('/album', AlbumController.getAll);
+app.get('/album/:id', AlbumController.getById);
 
 const port = process.env.PORT;
 app.listen(port, () => {
