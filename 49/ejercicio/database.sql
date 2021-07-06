@@ -40,6 +40,10 @@ band INT NOT NULL,
 date_publication DATE NOT NULL
 );
 
+ALTER TABLE songs ADD FOREIGN KEY (album) REFERENCES albums(id);
+ALTER TABLE songs ADD FOREIGN KEY (band) REFERENCES bands(id);
+ALTER TABLE albums ADD FOREIGN KEY (band) REFERENCES bands(id);
+
 INSERT INTO songs VALUES (null, 'Perfect', '4', '1', '1', '2002/01/01');
 INSERT INTO songs VALUES (null, 'Sugar', '2', '1', '1', '2015/10/03');
 
