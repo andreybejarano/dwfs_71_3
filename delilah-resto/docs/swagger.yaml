@@ -1,0 +1,16 @@
+openapi: 3.0.1
+info:
+  title: Delilah Resto
+  description: 'Proyecto para acamica de pedido de restaurantes'
+  contact:
+    email: andreybejarano@gmail.com
+  version: 1.0.0
+servers:
+- url: http://localhost:3000
+tags:
+- name: user
+  description: Modulo de usuario
+paths:
+  
+components:
+  schemas:
