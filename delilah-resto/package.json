@@ -17,7 +17,7 @@
     "nodeArgs": [
       ""
     ],
-    "ext": ".yaml"
+    "ext": ".yaml, .js, .json"
   },
   "author": "",
   "license": "ISC",
