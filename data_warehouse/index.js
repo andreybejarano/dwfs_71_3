@@ -1,24 +1,20 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 
 const config = require('./config');
 
-const RolesController = require('./controllers/Roles');
-const UserController = require('./controllers/Users');
-
 const app = express();
+const apiPath = '/api';
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.post('/role', RolesController.create);
-app.get('/role', RolesController.getAll);
+app.use('/', express.static('dist'));
 
-app.post('/user', UserController.create);
-app.get('/user', UserController.getAll);
-app.post('/login', UserController.login);
-
+app.use(apiPath, require('./routes'));
 
 mongoose.Promise = global.Promise;
 const userPaswordDatabase = (config.database.user || config.database.password) && `${config.database.user}:${config.database.password}@`;

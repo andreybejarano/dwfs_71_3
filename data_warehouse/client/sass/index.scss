@@ -1,0 +1,14 @@
+@import "header.scss";
+@import "footer.scss";
+
+body {
+  margin: 0;
+  padding: 0;
+  h1, h5 {
+    margin: 0;
+  }
+}
+
+.content {
+  background-color: blue;
+}
