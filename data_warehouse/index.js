@@ -17,6 +17,7 @@ app.get('/role', RolesController.getAll);
 
 app.post('/user', UserController.create);
 app.get('/user', UserController.getAll);
+app.post('/login', UserController.login);
 
 
 mongoose.Promise = global.Promise;

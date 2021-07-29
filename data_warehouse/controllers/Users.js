@@ -60,6 +60,29 @@ class UserController {
             return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(error);
         }
     }
+
+    static async login(req, res) {
+        const { email, password } = req.body;
+        try {
+            const user = await userModel.findOne({ email });
+            if (!user) {
+                throw { status: StatusCodes.UNAUTHORIZED, message: 'Usuario y/o Contraseña invalidos' };
+            }
+            const match = await user.comparePassword(password);
+            if (!match) {
+                throw { status: StatusCodes.UNAUTHORIZED, message: 'Usuario y/o Contraseña invalidos' };
+            }
+            return res.json({
+                status: StatusCodes.OK,
+                token: 'token'
+            });
+        } catch (error) {
+            return res.status(error.status || StatusCodes.INTERNAL_SERVER_ERROR).json({
+                status: error.status || StatusCodes.INTERNAL_SERVER_ERROR,
+                error: error.message || 'Internal server error'
+            });
+        }
+    }
 }
 
 module.exports = UserController;
